@@ -13,7 +13,28 @@
     stage('Test') {
       steps {
         script {
-          sh 'echo "Testing Stage"'
+          sh 'echo "Testing Stage'
+        }
+      }
+    }
+    stage('Package'){
+      steps {
+        script {
+          sh 'echo packaging our application'
+        }
+      }
+    }
+    stage ('Deploy') {
+      steps {
+        script {
+          sh 'echo Deploying the application'
+        }
+      }
+    }
+    stage ('clean') {
+      steps {
+        script {
+          sh 'echo cleaning up'
         }
       }
     }
