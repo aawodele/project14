@@ -1,42 +1,41 @@
-  pipeline {
-    agent any
+pipeline{
+   agent any
+   environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+     parameters {
+      string(name: 'inventory_file', defaultValue: 'dev',  description: 'selecting the environment')
+          }
 
-  stages {
-    stage('Build') {
-      steps {
-        script {
-          sh 'echo "Building Stage"'
-        }
-      }
-    }
 
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo Testing Stage'
+   stages{
+      stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+      stage('Checkout SCM') {
+         steps{
+            git branch: 'feat', url: 'https://github.com/aawodele/project14.git'
+         }
+       }
+      stage('Prepare Ansible For Execution') {
+        steps {
+          sh 'echo ${WORKSPACE}'
+        }
+     }
+      stage('Run Ansible') {
+        steps {
+            ansiblePlaybook colorized: true, credentialsId: 'bastion', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory/${params.inventory_file}', playbook: 'playbooks/site.yml'
         }
       }
-    }
-    stage('Package'){
-      steps {
-        script {
-          sh 'echo packaging our application'
+      stage('Clean Workspace after build'){
+        steps{
+          cleanWs()
         }
       }
-    }
-    stage ('Deploy') {
-      steps {
-        script {
-          sh 'echo Deploying the application'
-        }
-      }
-    }
-    stage ('clean') {
-      steps {
-        script {
-          sh 'echo cleaning up'
-        }
-      }
-    }
-    }
+   }
 }
+
