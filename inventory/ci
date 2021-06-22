@@ -1,3 +1,9 @@
 [jenkins]
 172.31.31.213 
 
+[sonarqube]
+172.31.15.206
+
+[artifact_repository]
+172.31.5.76
+
