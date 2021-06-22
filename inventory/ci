@@ -1,9 +1,5 @@
 [jenkins]
-172.31.31.213 
+172.31.31.213 ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=/home/ubuntu/.ssh/key.pem
 
-[sonarqube]
-172.31.15.206
 
-[artifact_repository]
-172.31.5.76
 
