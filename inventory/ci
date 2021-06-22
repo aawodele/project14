@@ -1,8 +1,7 @@
 [jenkins]
 172.31.13.25
 
-[nginx]
-<Nginx-Private-IP-Address>
+
 
 [sonarqube]
 172.31.15.206
