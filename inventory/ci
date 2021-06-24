@@ -1,5 +1,5 @@
-[jenkins-Ansible] 
-172.31.31.213 ansible_ssh_user='ubuntu'
+
+
 
 [sonarqube]
 172.31.23.81
