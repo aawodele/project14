@@ -1,12 +1,9 @@
 [jenkins-Ansible]
-172.31.31.213 jenkins_ssh_user='ec2-user' jenkins_ssh_private_key_file=/home/ec2-user/.ssh/key.pem
-
+172.31.31.213 
 
 [sonarqube]
-172.31.23.81 jenkins_ssh_user='ec2-user' jenkins_ssh_private_key_file=/home/ec2-user/.ssh/key.pem
-
+172.31.23.81
 
 
 [artifact_repository]
-<172.31.24.60 jenkins_ssh_user='ec2-user' jenkins_ssh_private_key_file=/home/ec2-user/.ssh/key.pem
-
+<172.31.24.60 
