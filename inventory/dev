@@ -2,7 +2,7 @@
 <Tooling-Web-Server-Private-IP-Address>
 
 [todo]
-<Todo-Web-Server-Private-IP-Address>
+172.31.36.24
 
 [nginx]
 <Nginx-Private-IP-Address>
@@ -12,4 +12,4 @@ ansible_user=ec2-user
 ansible_python_interpreter=/usr/bin/python
 
 [db]
-<DB-Server-Private-IP-Address>
+172.31.47.12
