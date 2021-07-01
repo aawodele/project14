@@ -1,0 +1,55 @@
+---
+- name: Deploying the PHP Applicaion to Dev Enviroment
+  become: true
+  hosts: todo
+  tasks:
+    - name: install httpd on the webserver
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: ensure httpd is started and enabled
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: install PHP
+      ansible.builtin.yum:
+        name:
+          - php
+          - php-mysqlnd
+          - php-gd
+          - php-curl
+          - unzip
+        state: present
+
+    - name: Download the artifact
+      get_url:
+        url: http://3.138.118.238:8082/artifactory/todo-app/
+        dest: /home/ec2-user/
+        url_username: admin
+        url_password: Abiodun123
+
+    - name: unzip the artifacts
+      ansible.builtin.unarchive:
+       src: /home/ec2-user/php-todo
+       dest: /home/ec2-user/
+       remote_src: yes
+
+    - name: deploy the code
+      ansible.builtin.copy:
+        src: /home/ec2-user/var/lib/jenkins/workspace/php-todo_main/
+        dest: /var/www/html/
+        force: yes
+        remote_src: yes
+
+    - name: remove httpd default page
+      ansible.builtin.file:
+        path: /etc/httpd/conf.d/welcome.conf
+        state: absent
+
+    - name: restart http
+      ansible.builtin.service:
+        name: httpd
+        state: restarted

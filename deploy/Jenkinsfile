@@ -18,7 +18,7 @@ pipeline{
         }
       stage('Checkout SCM') {
          steps{
-            git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/aawodele/project14.git'
+            git branch: 'main', url: 'https://github.com/aawodele/project14.git'
          }
        }
       stage('Prepare Ansible For Execution') {
@@ -28,7 +28,7 @@ pipeline{
      }
       stage('Run Ansible') {
         steps {
-            ansiblePlaybook colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
+            ansiblePlaybook colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/', playbook: 'playbooks/deploy.yml'
         }
       }
       stage('Clean Workspace after build'){
